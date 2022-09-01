@@ -1,4 +1,5 @@
 ﻿using AprendendoAPIComPersistencia.Models;
+using AprendendoAPIComPersistencia.ViewModels;
 
 namespace AprendendoAPIComPersistencia.Repositories
 {
@@ -27,6 +28,67 @@ namespace AprendendoAPIComPersistencia.Repositories
             respostaSql.Close();
 
             return produtos;
+        }
+
+        public static List<ProdutosComFornecedoresViewModel> ConsultarProdutosComFornecedores()
+        {
+            var produtos = new List<ProdutosComFornecedoresViewModel>();
+
+            var respostaSql = 
+                Select(@"SELECT p.*, f.* FROM Produtos p
+                            LEFT JOIN FornecedoresProdutos fp ON p.Id = fp.IdProduto
+                            LEFT JOIN Fornecedores f ON fp.IdFornecedor = f.Id;");
+            while (respostaSql.Read())
+            {
+                var produtoComFornecedor = new ProdutosComFornecedoresViewModel()
+                {
+                    IdProduto = respostaSql.GetInt64(0),
+                    Descricao = respostaSql.GetString(1),
+                    Categoria = respostaSql.GetString(2),
+                    IdFornecedor = respostaSql.GetInt64(3),
+                    Nome = respostaSql.GetString(4)
+                };
+                produtos.Add(produtoComFornecedor);
+            }
+            respostaSql.Close();
+
+            return produtos;
+        }
+
+        public static Produto ConsultarPorId(long id)
+        {
+            var respostaSql = Select($"SELECT * FROM Produtos WHERE Id = {id}");
+            if (respostaSql.Read())
+            {
+                var produto = new Produto()
+                {
+                    Id = respostaSql.GetInt64(0),
+                    Descricao = respostaSql.GetString(1),
+                    Categoria = respostaSql.GetString(2)
+                };
+                respostaSql.Close();
+                return produto;
+            }
+            
+            return new Produto();
+        }
+
+        public static Produto ConsultarPorDescricao(String nome)
+        {
+            var respostaSql = Select($"SELECT * FROM Produtos WHERE Descricao like '%{nome}%'");
+            if (respostaSql.Read())
+            {
+                var produto = new Produto()
+                {
+                    Id = respostaSql.GetInt64(0),
+                    Descricao = respostaSql.GetString(1),
+                    Categoria = respostaSql.GetString(2)
+                };
+                respostaSql.Close();
+                return produto;
+            }
+
+            return new Produto();
         }
 
         public static int Cadastrar(Produto produto)

@@ -1,5 +1,6 @@
 ﻿using AprendendoAPIComPersistencia.Models;
 using AprendendoAPIComPersistencia.Repositories;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
@@ -20,6 +21,34 @@ namespace AprendendoAPIComPersistencia.Controllers
         public ActionResult<List<Produto>> ConsultarProdutos()
         {
             return ProdutosRepository.ConsultarTodos();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public ActionResult ConsultarProduto(long id)
+        {
+            var produto = ProdutosRepository.ConsultarPorId(id);
+            if (produto.Id == 0)
+                return NotFound($"Não foi encontrado produto com o id {id}");
+            return Ok(produto);
+        }
+
+        [HttpGet]
+        [Route("Descricao/{nome}")]
+        public ActionResult ConsultarPorDescricao(string nome)
+        {
+            var produto = ProdutosRepository.ConsultarPorDescricao(nome);
+            if (produto.Id == 0)
+                return NotFound($"Não foi encontrado produto com o nome {nome}");
+            return Ok(produto);
+        }
+
+        [HttpGet]
+        [Route("ProdutosComFornecedores")]
+        public ActionResult ConsultarProdutosComFornecedores()
+        {
+            var produtos = ProdutosRepository.ConsultarProdutosComFornecedores();
+            return Ok(produtos);
         }
 
         [HttpPost]
