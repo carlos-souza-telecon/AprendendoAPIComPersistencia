@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\carlos.souza\\source\\repos\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia.csproj": {}
+    "C:\\Dev\\Github\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia.csproj": {}
   },
   "projects": {
-    "C:\\Users\\carlos.souza\\source\\repos\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia.csproj": {
+    "C:\\Dev\\Github\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\carlos.souza\\source\\repos\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia.csproj",
+        "projectUniqueName": "C:\\Dev\\Github\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia.csproj",
         "projectName": "AprendendoAPIComPersistencia",
-        "projectPath": "C:\\Users\\carlos.souza\\source\\repos\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia.csproj",
-        "packagesPath": "C:\\Users\\carlos.souza\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\carlos.souza\\source\\repos\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia\\obj\\",
+        "projectPath": "C:\\Dev\\Github\\AprendendoAPIComPersistencia\\AprendendoAPIComPersistencia.csproj",
+        "packagesPath": "C:\\Users\\rique\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\Github\\AprendendoAPIComPersistencia\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\carlos.souza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rique\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

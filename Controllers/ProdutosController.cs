@@ -1,4 +1,5 @@
 ﻿using AprendendoAPIComPersistencia.Models;
+using AprendendoAPIComPersistencia.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
@@ -18,37 +19,28 @@ namespace AprendendoAPIComPersistencia.Controllers
         [HttpGet]
         public ActionResult<List<Produto>> ConsultarProdutos()
         {
-            List<Produto> produtos = new List<Produto>();
+            return ProdutosRepository.ConsultarTodos();
+        }
 
-            string connString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=aprendendoapi;Persist Security Info=True;User ID=aprendendoapi;Password=aprendendoapi;Integrated Security=false";
-            SqlConnection conn = new SqlConnection(connString);
+        [HttpPost]
+        public ActionResult CadastrarProduto(Produto produto)
+        {
+            int resultados = ProdutosRepository.Cadastrar(produto);
+            return Ok($"{resultados} produto(s) cadastrado(s).");
+        }
 
-            try
-            {
-                _logger.LogInformation("Abrindo conexão com o banco...");
-                conn.Open();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Erro ao conectar com o banco:\n{ex.Message}");
-                return Problem($"Erro ao conectar com o banco:\n{ex.Message}");
-            }
+        [HttpPut]
+        public ActionResult AlterarProduto(Produto produto)
+        {
+            int resultados = ProdutosRepository.Alterar(produto);
+            return Ok($"{resultados} produto(s) alterado(s).");
+        }
 
-            SqlCommand command = new SqlCommand("SELECT * FROM Produtos;", conn);
-            SqlDataReader respostaSql = command.ExecuteReader();
-
-            while(respostaSql.Read())
-            {
-                Produto produto = new Produto()
-                {
-                    Id = respostaSql.GetInt64(0),
-                    Descricao = respostaSql.GetString(1),
-                    Categoria = respostaSql.GetString(2)
-                };
-                produtos.Add(produto);
-            }
-
-            return produtos;
+        [HttpDelete]
+        public ActionResult ExcluirProduto(long id)
+        {
+            int resultados = ProdutosRepository.Excluir(id);
+            return Ok($"{resultados} produto(s) excluído(s).");
         }
 
     }
